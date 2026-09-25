@@ -1,4 +1,4 @@
-# Project 1 Overview
+# Project 2 Overview - Ritesh, Katie, Abishek
 
 This project focuses on solving the Processing Files problem. A web server receives a queue of files from users and can process only one file at a time. Since processing time
 increases with file size, the order in which files are processed affects how long users have to wait.
