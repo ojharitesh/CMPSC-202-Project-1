@@ -5,4 +5,4 @@ increases with file size, the order in which files are processed affects how lon
 
 The goal of this project is to find an ordering of the files that minimizes the average completion time. We first use a brute-force baseline that checks every possible ordering
 to find the optimal solution. We then develop a more efficient greedy algorithm that processes files from smallest to largest and compare the correctness and running time of
-both approaches.
+both  approaches.
