@@ -18,24 +18,24 @@ The baseline is restricted to inputs of at most 10 files because its factorial r
 The table below reports the arithmetic mean of the five recorded runtimes in [`empirical_results.csv`](assests/empirical_results.csv).
 
 | Number of files (n) | Baseline mean time (seconds) | Greedy mean time (seconds) |
-| ---: | ---: | ---: |
-| 10 | 1.838299767 | 0.000003142 |
-| 50 | — | 0.000002667 |
-| 100 | — | 0.000007792 |
-| 500 | — | 0.000026867 |
-| 1,000 | — | 0.000103433 |
-| 5,000 | — | 0.000339908 |
-| 10,000 | — | 0.001897458 |
-| 20,000 | — | 0.001862208 |
-| 30,000 | — | 0.003294183 |
-| 40,000 | — | 0.004597400 |
-| 50,000 | — | 0.005281250 |
+| ------------------: | ---------------------------: | -------------------------: |
+|                  10 |                  1.838299767 |                0.000003142 |
+|                  50 |                            — |                0.000002667 |
+|                 100 |                            — |                0.000007792 |
+|                 500 |                            — |                0.000026867 |
+|               1,000 |                            — |                0.000103433 |
+|               5,000 |                            — |                0.000339908 |
+|              10,000 |                            — |                0.001897458 |
+|              20,000 |                            — |                0.001862208 |
+|              30,000 |                            — |                0.003294183 |
+|              40,000 |                            — |                0.004597400 |
+|              50,000 |                            — |                0.005281250 |
 
 A dash indicates that the baseline was not measured at that input size.
 
-![Benchmark execution times for the baseline and greedy algorithms](assests/benchmark_plot.png)
+![Benchmark execution times for the baseline and greedy algorithms](../assest/benchmark_plot.png)
 
-![Benchmark execution times on a logarithmic scale](assests/benchmark_plot_log.png)
+![Benchmark execution times on a logarithmic scale](../assest/benchmark_plot_log.png)
 
 ## Analysis
 
