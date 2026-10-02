@@ -2,16 +2,16 @@
 
 ## Overview
 
-We implemented two algorithms in [`methods.py`](src/methods.py) to solve the Processing Files problem. Both return an ordering of the files and the minimum average completion time when one file is processed at a time.
+We implemented two algorithms to solve the Processing Files problem. Both return an ordering of the files and the minimum average completion time when one file is processed at a time.
 
 1. **Baseline Algorithm:** A brute-force approach that checks every possible permutation of the files, calculates each ordering's average completion time, and keeps the best result.
 2. **Proposed Algorithm:** A greedy approach that sorts files from smallest to largest, then calculates the average completion time in a single pass.
 
-The nine unit tests in [`tests.py`](src/tests.py) check cumulative completion times, known optimal results, empty inputs, single files, duplicates, zero sizes, fractional sizes, and preservation of the original input. They also compare the greedy algorithm with the exhaustive baseline on all 121 sequences of length zero through four using sizes from `{0, 1, 3}`, and check the greedy algorithm on 10,000 files. All nine tests pass. For the example `[8, 3, 6, 2]` from [`planning.md`](planning.md), both algorithms return `[2, 3, 6, 8]` with an average completion time of **9.25**.
+The nine unit tests in check cumulative completion times, known optimal results, empty inputs, single files, duplicates, zero sizes, fractional sizes, and preservation of the original input. They also compare the greedy algorithm with the exhaustive baseline on all 121 sequences of length zero through four using sizes from `{0, 1, 3}`, and check the greedy algorithm on 10,000 files. All nine tests pass. For the example `[8, 3, 6, 2]` from [`planning.md`](planning.md), both algorithms return `[2, 3, 6, 8]` with an average completion time of **9.25**.
 
 ## Benchmarking Results
 
-The benchmark in [`benchmark.py`](src/benchmark.py) generates random integer file sizes from 1 to 100 (`L = 100`) and varies the number of files from 10 to 50,000. Each algorithm runs five times on the same generated array at each applicable input size, with execution time measured using `perf_counter()`. Input generation and CSV writing occur outside the timed section. These measurements represent the runtime of the ordering algorithms, rather than the time needed to process actual files.
+The benchmark generates random integer file sizes from 1 to 100 (`L = 100`) and varies the number of files from 10 to 50,000. Each algorithm runs five times on the same generated array at each applicable input size, with execution time measured using `perf_counter()`. Input generation and CSV writing occur outside the timed section. These measurements represent the runtime of the ordering algorithms, rather than the time needed to process actual files.
 
 The baseline is restricted to inputs of at most 10 files because its factorial runtime makes larger inputs impractical. Since the smallest benchmark input is 10 files, the recorded results contain only one baseline input size. Both algorithms use the same input at that size.
 
