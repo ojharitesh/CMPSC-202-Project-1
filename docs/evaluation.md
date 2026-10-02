@@ -15,7 +15,7 @@ The benchmark generates random integer file sizes from 1 to 100 (`L = 100`) and 
 
 The baseline is restricted to inputs of at most 10 files because its factorial runtime makes larger inputs impractical. Since the smallest benchmark input is 10 files, the recorded results contain only one baseline input size. Both algorithms use the same input at that size.
 
-The table below reports the arithmetic mean of the five recorded runtimes in [`empirical_results.csv`](assests/empirical_results.csv).
+The table below reports the arithmetic mean of the five recorded runtimes in [`empirical_results.csv`](../assets/empirical_results.csv).
 
 | Number of files (n) | Baseline mean time (seconds) | Greedy mean time (seconds) |
 | ------------------: | ---------------------------: | -------------------------: |
@@ -33,9 +33,9 @@ The table below reports the arithmetic mean of the five recorded runtimes in [`e
 
 A dash indicates that the baseline was not measured at that input size.
 
-![Benchmark execution times for the baseline and greedy algorithms](../assest/benchmark_plot.png)
+![Benchmark execution times for the baseline and greedy algorithms](../assets/benchmark_plot.png)
 
-![Benchmark execution times on a logarithmic scale](../assest/benchmark_plot_log.png)
+![Benchmark execution times on a logarithmic scale](../assets/benchmark_plot_log.png)
 
 ## Analysis
 
