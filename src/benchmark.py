@@ -25,13 +25,13 @@ def benchmark_algo_multi(algo, test_cases, repeat=1):
 
 def run_benchmarks():
     # Identical input sizes shared by both algorithms
-    input_sizes = [10, 50, 100, 500, 1000, 5000, 10000, 20000, 30000, 40000, 50000]
+    input_sizes = [5, 7, 8, 9, 10, 50, 100, 500, 1000, 5000, 10000, 20000, 30000, 40000, 50000]
     L = 100
 
     # Generate one master set of test cases so inputs are identical
     test_cases = [generate_test_data(size, L) for size in input_sizes]
 
-    # Filter test cases for Baseline to only keep sizes <= 10 items (needed as to prevent freezing because the baseline algorithm is O(n^2) and will take too long for larger sizes)
+    # Limit the baseline to at most 10 files because its O(n * n!) time complexity makes larger inputs impractical
     baseline_test_cases = [case for case in test_cases if len(case) <= 10]
 
     print("Running Baseline algorithm (Filtered to safe sizes)...")
