@@ -55,7 +55,3 @@ Overall, our empirical results support our theoretical analysis and show that th
 ![Execution Time Comparison (Logarithmic Scale)](../assets/benchmark_plot_log.png)
 
 ![Execution Time Comparison (Baseline Only)](../assets/benchmark_baseline.png)
-
-## Baseline Comparison
-
-## Reflection
