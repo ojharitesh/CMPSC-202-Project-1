@@ -12,8 +12,6 @@ For example, for the order `[8, 3, 6, 2]`, the completion times are $8$, $11$, $
 
 The baseline uses a brute-force approach. It generates every possible permutation of the files, calculates the average completion time for each permutation, and keeps the ordering with the smallest average.
 
-For example, with the input `[8, 3, 6, 2]`, there are $4! = 24$ possible orderings. The baseline checks all 24 possibilities and finds that `[2, 3, 6, 8]` has the lowest average completion time, which is `9.25`.
-
 ```text
 Algorithm ProcessFilesBaseline(F):
     best_order = F
@@ -77,7 +75,54 @@ To understand how the greedy approach works, let's trace it with the example arr
 
 Optimal ordering: `[2, 3, 6, 8]`. Minimum average completion time: `37 / 4 = 9.25`.
 
-This strategy is optimal because any adjacent pair with a larger file before a smaller file can be swapped to reduce the total completion time. The smaller file finishes earlier, while the pair's finishing time and every later file's completion time stay the same. Repeating these swaps produces ascending order, so the sorted ordering minimizes the average completion time. Sorting takes $O(n \log n)$ time, and calculating completion times takes $O(n)$ time, giving an overall time complexity of $O(n \log n)$.
+The correctness of this strategy and its time complexity are explained in the sections below.
+
+## Correctness Analysis
+
+### Baseline Algorithm
+
+The baseline algorithm is correct because it checks every possible ordering of the files. For each ordering, it calculates the average completion time and compares it with the best result found so far. Since every possible ordering is evaluated, the algorithm cannot miss the ordering with the minimum average completion time. Therefore, the result returned by the baseline is optimal.
+
+### Greedy Algorithm
+
+The greedy algorithm processes files from smallest to largest. This ordering is optimal because a file affects not only its own completion time, but also the completion time of every file processed after it.
+
+Consider two adjacent files where a larger file is processed before a smaller file. Let the two file sizes be $a$ and $b$, where $a > b$. If the order is $[a, b]$, their completion times are $t + a$ and $t + a + b$, where $t$ is the time before these files begin. Their combined completion time is:
+
+$$
+(t + a) + (t + a + b) = 2t + 2a + b
+$$
+
+If we swap them to `[b, a]`, their combined completion time becomes:
+
+$$
+(t + b) + (t + b + a) = 2t + 2b + a
+$$
+
+Because $b < a$, the swapped order has a smaller combined completion time. The completion times of all files after this pair do not change because both files still take the same total time to process. Therefore, swapping any larger file that appears before a smaller file reduces the total completion time. Repeatedly applying this swap produces ascending order, proving that the greedy algorithm returns an optimal ordering.
+
+## Complexity Analysis
+
+### Baseline Algorithm
+
+For $n$ files, the baseline examines $n!$ possible permutations. Calculating the average completion time for one permutation requires processing all $n$ files, which takes $O(n)$ time. Therefore, the total time complexity is:
+
+$$
+O(n! \times n)
+$$
+
+The baseline also stores a copy of the best ordering, which requires $O(n)$ space. The permutation generator may use additional space while producing each ordering, but the dominant practical limitation is its factorial running time.
+
+### Greedy Algorithm
+
+The greedy algorithm first sorts the $n$ file sizes, which takes $O(n \log n)$ time. It then makes one pass through the sorted files to calculate completion times, which takes $O(n)$ time. The total time complexity is therefore:
+
+$$
+O(n \log n) + O(n) = O(n \log n)
+$$
+
+The sorted list and the returned ordering require $O(n)$ space. Compared with the baseline's factorial running time, the greedy algorithm is practical for much larger inputs.
+
 
 ## Empirical Synthesis
 
@@ -92,7 +137,7 @@ We compared the performance of both algorithms using randomly generated arrays o
 The plots below illustrate the differences in execution time. The first plot shows the results on a linear scale, while the second uses a logarithmic scale to better display the large differences between the two algorithms.
 
 | ![Benchmark Plot (Linear Scale)](../assets/benchmark_plot.png) | ![Benchmark Plot (Logarithmic Scale)](../assets/benchmark_plot_log.png) |
-|---|---|
+| -------------------------------------------------------------- | ----------------------------------------------------------------------- |
 
 The following graph focuses specifically on the brute-force baseline, illustrating how its execution time increases as the number of files grows.
 
@@ -100,9 +145,9 @@ The following graph focuses specifically on the brute-force baseline, illustrati
 
 Our empirical results are consistent with our theoretical complexity analysis:
 
-- **Baseline Factorial Scaling:** The baseline algorithm has a theoretical time complexity of $O(n \times n!)$ because it examines every possible ordering of the files. At just 10 files, the baseline took approximately **1.84 seconds** on average. This demonstrates how quickly the brute-force approach becomes impractical as input sizes increase.
+- **Baseline Factorial Scaling:** The baseline algorithm has a theoretical time complexity of $O(n \times n!)$ because it examines every possible ordering of the files. At 10 files, the baseline took approximately **1.034 seconds** on average. This demonstrates how quickly the brute-force approach becomes impractical as input sizes increase.
 
-- **Proposed Algorithm Efficiency:** The greedy algorithm operates at $O(n \log n)$ because it sorts the files before calculating their average completion time. At 10 files, the greedy algorithm took approximately **0.00000314 seconds**, compared to the baseline's 1.84 seconds. Even when processing 50,000 files, the greedy algorithm took only approximately **0.00528 seconds**, demonstrating its scalability.
+- **Proposed Algorithm Efficiency:** The greedy algorithm operates at $O(n \log n)$ because it sorts the files before calculating their average completion time. At 10 files, the greedy algorithm took approximately **0.000000733 seconds**, compared to the baseline's 1.034 seconds. Even when processing 50,000 files, the greedy algorithm took only approximately **0.00352 seconds**, demonstrating its scalability.
 
 - **Runtime Observations:** The linear-scale graph shows a sharp increase in baseline execution time, while the greedy algorithm appears nearly flat because its runtimes are significantly smaller. The logarithmic-scale graph makes these differences easier to observe. Although greedy runtimes generally increased with input size, minor fluctuations occurred, potentially due to system activity or measurement overhead.
 
