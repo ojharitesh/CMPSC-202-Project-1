@@ -16,24 +16,24 @@ For example, with the input `[8, 3, 6, 2]`, there are $4! = 24$ possible orderin
 
 ```text
 Algorithm ProcessFilesBaseline(F):
-	best_order = F
-	best_average = infinity
+    best_order = F
+    best_average = infinity
 
-	for each permutation P of F:
-		current_time = 0
-		total_completion_time = 0
+    for each permutation P of F:
+        current_time = 0
+        total_completion_time = 0
 
-		for each file in P:
-			current_time = current_time + file
-			total_completion_time = total_completion_time + current_time
+        for each file in P:
+            current_time = current_time + file
+            total_completion_time = total_completion_time + current_time
 
-		average = total_completion_time / number of files
+        average = total_completion_time / number of files
 
-		if average < best_average:
-			best_order = P
-			best_average = average
+        if average < best_average:
+            best_order = P
+            best_average = average
 
-	return best_order, best_average
+    return best_order, best_average
 ```
 
 The baseline guarantees an optimal result because it checks every possible ordering. However, it becomes impractical for large inputs. There are $n!$ possible permutations, and evaluating each permutation takes $O(n)$ time, so the overall time complexity is $O(n! \times n)$.
