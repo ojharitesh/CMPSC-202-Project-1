@@ -1,4 +1,44 @@
-# Findings
+# Processing Files Problem
+
+The Processing Files problem asks us to reorder a list of files so that the average completion time is minimized. Only one file can be processed at a time, so the order of the files affects how long each file waits before finishing. Our project compares a brute-force baseline with a more efficient greedy algorithm.
+
+## Problem Formulation
+
+We have a list of `n` files, written as `F = [f₁, f₂, ..., fₙ]`. Each file's size represents how long it takes to process. A file's completion time includes its own processing time and the time spent processing the files before it. Our goal is to arrange the files so that their average completion time is as small as possible.
+
+For example, for the order `[8, 3, 6, 2]`, the completion times are $8$, $11$, $17$, and $19$, giving an average of $13.75$. Reordering the files to `[2, 3, 6, 8]` gives completion times $2$, $5$, $11$, and $19$, with an average of $9.25$.
+
+## Baseline Solution
+
+The baseline uses a brute-force approach. It generates every possible permutation of the files, calculates the average completion time for each permutation, and keeps the ordering with the smallest average.
+
+For example, with the input `[8, 3, 6, 2]`, there are $4! = 24$ possible orderings. The baseline checks all 24 possibilities and finds that `[2, 3, 6, 8]` has the lowest average completion time, which is `9.25`.
+
+```text
+Algorithm ProcessFilesBaseline(F):
+	best_order = F
+	best_average = infinity
+
+	for each permutation P of F:
+		current_time = 0
+		total_completion_time = 0
+
+		for each file in P:
+			current_time = current_time + file
+			total_completion_time = total_completion_time + current_time
+
+		average = total_completion_time / number of files
+
+		if average < best_average:
+			best_order = P
+			best_average = average
+
+	return best_order, best_average
+```
+
+The baseline guarantees an optimal result because it checks every possible ordering. However, it becomes impractical for large inputs. There are $n!$ possible permutations, and evaluating each permutation takes $O(n)$ time, so the overall time complexity is $O(n! \times n)$.
+
+## Proposed Algorithmic Strategy
 
 ## Empirical Synthesis
 
